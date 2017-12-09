@@ -16,6 +16,12 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <service
+            android:name=".service.UpdateWordService"
+            android:enabled="true"
+            android:exported="true"
+            android:process="@string/app_name"/>
     </application>
 
 </manifest>
