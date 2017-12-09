@@ -1,0 +1,19 @@
+<resources>
+    <string name="app_name">一封情书</string>
+
+    <string-array name="word_array">
+        <item>测试数据1</item>
+        <item>测试数据2</item>
+        <item>测试数据3</item>
+        <item>测试数据4</item>
+        <item>测试数据5</item>
+        <item>测试数据6</item>
+        <item>测试数据7</item>
+        <item>测试数据8</item>
+        <item>测试数据9</item>
+        <item>测试数据10</item>
+        <item>测试数据11</item>
+        <item>测试数据12</item>
+        <item>测试数据13</item>
+    </string-array>
+</resources>

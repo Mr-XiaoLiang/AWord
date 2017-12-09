@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="liang.lollipop.aword.MainActivity">
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:foreground="@drawable/fg_shadow">
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/bgView"/>
+
+        <TextView
+            android:id="@+id/wordView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="你好啊！哈哈！Hello World!"
+            android:layout_gravity="center"
+            android:textSize="20sp"
+            android:gravity="center"
+            android:padding="20dp"/>
+    </FrameLayout>
+
+
+    <liang.lollipop.aword.view.TouchListenerImageView
+        android:padding="15dp"
+        android:id="@+id/nextBtn"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_gravity="right|bottom|end"
+        android:layout_marginBottom="70dp"
+        android:layout_marginRight="30dp"
+        android:layout_marginLeft="30dp"
+        android:background="?attr/selectableItemBackgroundBorderless"/>
+
+    <TextView
+        android:id="@+id/copyrightText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="10dp"
+        android:layout_gravity="bottom"
+        android:layout_marginBottom="70dp"
+        android:text="来自Lollipop"
+        android:clickable="true"
+        android:focusable="true"
+        android:textColor="@color/color_press_show"/>
+
+</FrameLayout>
