@@ -7,10 +7,6 @@ import android.net.NetworkInfo;
 import android.os.Handler;
 import android.support.v4.app.Fragment;
 import android.text.TextUtils;
-import android.util.Log;
-
-import com.sina.util.dnscache.DNSCache;
-import com.sina.util.dnscache.DomainInfo;
 
 import org.json.JSONException;
 
@@ -22,26 +18,14 @@ import java.net.FileNameMap;
 import java.net.InetAddress;
 import java.net.URLConnection;
 import java.net.UnknownHostException;
-import java.security.KeyStore;
-import java.security.SecureRandom;
-import java.security.cert.CertificateFactory;
-import java.security.cert.X509Certificate;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import javax.net.ssl.SSLContext;
-import javax.net.ssl.SSLSocketFactory;
-import javax.net.ssl.TrustManager;
-import javax.net.ssl.TrustManagerFactory;
-import javax.net.ssl.X509TrustManager;
-
-import okhttp3.Cache;
 import okhttp3.Call;
 import okhttp3.Callback;
 import okhttp3.Dns;
 import okhttp3.FormBody;
-import okhttp3.Headers;
 import okhttp3.HttpUrl;
 import okhttp3.Interceptor;
 import okhttp3.MediaType;
@@ -129,26 +113,6 @@ public class HttpRequest{
             }
         });
         okHttpClient = okBuilder.build();
-    }
-
-    private static class OkHttpDns implements Dns {
-        @Override
-        public List<InetAddress> lookup(String hostname){
-            try{
-                //通过异步解析接口获取ip
-                DomainInfo[] infoList = DNSCache.getInstance().getDomainServerIp(hostname) ;
-                if(infoList != null&&infoList.length>0) {
-                    //如果ip不为null，直接使用该ip进行网络请求
-                    List<InetAddress> inetAddresses = Arrays.asList(InetAddress.getAllByName(infoList[0].url));
-                    return inetAddresses;
-                }
-                //如果返回null，走系统DNS服务解析域名
-                return Dns.SYSTEM.lookup(hostname);
-            }catch (Exception e){
-                Log.e("OkHttpDns",e.getLocalizedMessage());
-            }
-            return new ArrayList<>();
-        }
     }
 
     private static class DNSPod implements Dns {
@@ -1374,8 +1338,6 @@ public class HttpRequest{
     }
 
     public static void init(Context context){
-        //初始化DNS解析器
-        DNSCache.Init(context);
         //初始化网络状态检查器
         setSimplNetworkChecker(context);
 

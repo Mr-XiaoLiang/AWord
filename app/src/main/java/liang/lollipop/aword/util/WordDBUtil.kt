@@ -25,6 +25,14 @@ class WordDBUtil private constructor(context: Context): SQLiteOpenHelper(context
 
         val CREATE_WORD_TABLE = "create table $TABLE_WORD ( $WORD varchar  );"
 
+        fun getReadableDatabase(context: Context): SqlDB {
+            return SqlDB(WordDBUtil(context), false)
+        }
+
+        fun getWritableDatabase(context: Context): SqlDB {
+            return SqlDB(WordDBUtil(context), true)
+        }
+
     }
 
     override fun onCreate(db: SQLiteDatabase?) {
@@ -32,14 +40,6 @@ class WordDBUtil private constructor(context: Context): SQLiteOpenHelper(context
     }
 
     override fun onUpgrade(db: SQLiteDatabase?, oldVersion: Int, newVersion: Int) {
-    }
-
-    fun getReadableDatabase(context: Context): SqlDB {
-        return SqlDB(WordDBUtil(context), false)
-    }
-
-    fun getWritableDatabase(context: Context): SqlDB {
-        return SqlDB(WordDBUtil(context), true)
     }
 
     class SqlDB constructor(private var wordDatabaseHelper: WordDBUtil?, isWritable: Boolean) {

@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="liang.lollipop.aword.MainActivity">
+    tools:context="liang.lollipop.aword.activity.MainActivity">
 
     <FrameLayout
         android:layout_width="match_parent"
@@ -20,7 +20,7 @@
             android:id="@+id/wordView"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:text="你好啊！哈哈！Hello World!"
+            android:text="一封情书 送给我爱的你"
             android:layout_gravity="center"
             android:textSize="20sp"
             android:gravity="center"

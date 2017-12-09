@@ -2,18 +2,15 @@
     <string name="app_name">一封情书</string>
 
     <string-array name="word_array">
-        <item>测试数据1</item>
-        <item>测试数据2</item>
-        <item>测试数据3</item>
-        <item>测试数据4</item>
-        <item>测试数据5</item>
-        <item>测试数据6</item>
-        <item>测试数据7</item>
-        <item>测试数据8</item>
-        <item>测试数据9</item>
-        <item>测试数据10</item>
-        <item>测试数据11</item>
-        <item>测试数据12</item>
-        <item>测试数据13</item>
+        <item>一封情书 送给我爱的你</item>
+        <item>我想你了</item>
+        <item>别怕，身后有我</item>
+        <item>A Word , A World</item>
+        <item>你在想什么呢？</item>
+        <item>喜欢你笑的样子</item>
+        <item>宝贝，加油</item>
+        <item>你有想我吗？</item>
+        <item>吃饭了吗？</item>
+        <item>有你陪伴的日子，很满足</item>
     </string-array>
 </resources>

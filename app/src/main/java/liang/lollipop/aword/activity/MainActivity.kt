@@ -1,4 +1,4 @@
-package liang.lollipop.aword
+package liang.lollipop.aword.activity
 
 import android.animation.Animator
 import android.animation.ValueAnimator
@@ -20,6 +20,9 @@ import liang.lollipop.aword.view.TouchListenerImageView
 import java.util.*
 import android.content.IntentFilter
 import android.support.v4.content.ContextCompat
+import liang.lollipop.aword.R
+import liang.lollipop.aword.service.UpdateWordService
+import liang.lollipop.aword.util.WordDBUtil
 
 
 /**
@@ -76,6 +79,10 @@ class MainActivity : AppCompatActivity(), View.OnClickListener,ValueAnimator.Ani
                 Intent.ACTION_TIME_TICK,Intent.ACTION_TIMEZONE_CHANGED,Intent.ACTION_TIME_CHANGED -> {
                     setColor()
                 }
+
+                UpdateWordService.ACTION_UPDATE_SUCCESS -> {
+                    initData()
+                }
             }
         }
     }
@@ -86,8 +93,13 @@ class MainActivity : AppCompatActivity(), View.OnClickListener,ValueAnimator.Ani
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        initData()
         initView()
         initBroadcastReceiver()
+
+        nextWord()
+
+        startService(Intent(this,UpdateWordService::class.java))
     }
 
     override fun onStart() {
@@ -146,11 +158,17 @@ class MainActivity : AppCompatActivity(), View.OnClickListener,ValueAnimator.Ani
             }
         })
 
-        //初始化数据数组
-        val defWords = resources.getStringArray(R.array.word_array)
-        wordArray += defWords
-
         setColor()
+    }
+
+    private fun initData(){
+        wordArray.clear()
+        WordDBUtil.getReadableDatabase(this).getAll(wordArray).close()
+        if(wordArray.isEmpty()){
+            //初始化数据数组
+            val defWords = resources.getStringArray(R.array.word_array)
+            wordArray += defWords
+        }
     }
 
     private fun initBroadcastReceiver(){
@@ -158,6 +176,9 @@ class MainActivity : AppCompatActivity(), View.OnClickListener,ValueAnimator.Ani
         intentFilter.addAction(Intent.ACTION_TIME_TICK)
         intentFilter.addAction(Intent.ACTION_TIMEZONE_CHANGED)
         intentFilter.addAction(Intent.ACTION_TIME_CHANGED)
+
+        intentFilter.addAction(UpdateWordService.ACTION_UPDATE_SUCCESS)
+
         registerReceiver(broadcastReceiver, intentFilter)
     }
 
@@ -210,7 +231,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener,ValueAnimator.Ani
 
         wingsAnimator.cancel()
         wingsAnimator.setFloatValues(nextBtnPressPro,0.5F)
-        val duration = (Math.abs(nextBtnPressPro-0.5f)*2*WINGS_ANIMATOR_DURATION).toLong()
+        val duration = (Math.abs(nextBtnPressPro-0.5f)*2* WINGS_ANIMATOR_DURATION).toLong()
         wingsAnimator.duration = duration
         //设置插值器
         wingsAnimator.interpolator = decelerateInterpolator
@@ -223,7 +244,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener,ValueAnimator.Ani
 
         wingsAnimator.cancel()
         wingsAnimator.setFloatValues(nextBtnPressPro,1F)
-        val duration = (Math.abs(1F-nextBtnPressPro)*2*WINGS_ANIMATOR_DURATION).toLong()
+        val duration = (Math.abs(1F-nextBtnPressPro)*2* WINGS_ANIMATOR_DURATION).toLong()
         wingsAnimator.duration = duration
         //设置插值器
         wingsAnimator.interpolator = bounceInterpolator
@@ -283,11 +304,11 @@ class MainActivity : AppCompatActivity(), View.OnClickListener,ValueAnimator.Ani
     //设置颜色
     private fun setColor(){
         val bgColor = getNowColor(
-                ContextCompat.getColor(this,R.color.bgColorMax),
-                ContextCompat.getColor(this,R.color.bgColorMin))
+                ContextCompat.getColor(this, R.color.bgColorMax),
+                ContextCompat.getColor(this, R.color.bgColorMin))
         val textColor = getNowColor(
-                ContextCompat.getColor(this,R.color.textColorMax),
-                ContextCompat.getColor(this,R.color.textColorMin))
+                ContextCompat.getColor(this, R.color.textColorMax),
+                ContextCompat.getColor(this, R.color.textColorMin))
 
         bgView.setBackgroundColor(bgColor)
         wordView.setTextColor(textColor)
