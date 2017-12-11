@@ -43,11 +43,11 @@ object AWSettings {
         SharedPreferencesUtils.put(context,KET_SHOW_NEXT_BTN+id,value)
     }
 
-    fun copySendType(context: Context,newId:Int,oldId:Int){
+    private fun copySendType(context: Context, newId:Int, oldId:Int){
         setShowSendBtn(context,newId, isShowSendBtn(context,oldId))
     }
 
-    fun copyNextType(context: Context,newId:Int,oldId:Int){
+    private fun copyNextType(context: Context, newId:Int, oldId:Int){
         setShowNextBtn(context,newId, isShowNextBtn(context,oldId))
     }
 

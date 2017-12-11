@@ -1,15 +1,12 @@
 package liang.lollipop.aword.activity
 
 import android.app.Activity
-import android.app.PendingIntent
 import android.appwidget.AppWidgetManager
 import android.content.Intent
-import android.net.Uri
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.view.View
 import android.widget.CompoundButton
-import android.widget.RemoteViews
 import kotlinx.android.synthetic.main.activity_word_widget_configure.*
 import kotlinx.android.synthetic.main.content_word_widget_configure.*
 import kotlinx.android.synthetic.main.widget_word.*
@@ -17,7 +14,6 @@ import liang.lollipop.aword.R
 import liang.lollipop.aword.util.AWSettings
 import liang.lollipop.aword.util.WidgetUtil
 import liang.lollipop.aword.util.WordDBUtil
-import liang.lollipop.aword.widget.WordWidgetProvider
 import java.util.*
 
 
