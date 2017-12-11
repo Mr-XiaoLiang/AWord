@@ -13,4 +13,7 @@
         <item>吃饭了吗？</item>
         <item>有你陪伴的日子，很满足</item>
     </string-array>
+    <string name="title_activity_word_widget_configure">小部件设置</string>
+    <string name="appwidget_text">EXAMPLE</string>
+    <string name="add_widget">Add widget</string>
 </resources>

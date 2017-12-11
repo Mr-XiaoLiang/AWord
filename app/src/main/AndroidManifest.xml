@@ -2,8 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="liang.lollipop.aword">
 
-    <uses-permission android:name="android.permission.INTERNET"/>
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
     <application
         android:name=".AWApplication"
@@ -23,7 +23,26 @@
         <service
             android:name=".service.UpdateWordService"
             android:enabled="true"
-            android:exported="true"/>
+            android:exported="true" />
+
+        <activity
+            android:name=".activity.WordWidgetConfigureActivity"
+            android:label="@string/title_activity_word_widget_configure"
+            android:theme="@style/AppTheme">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_CONFIGURE" />
+            </intent-filter>
+        </activity>
+
+        <receiver android:name=".widget.WordWidgetProvider">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+            </intent-filter>
+
+            <meta-data
+                android:name="android.appwidget.provider"
+                android:resource="@xml/word_widget_provider_info" />
+        </receiver>
     </application>
 
 </manifest>
