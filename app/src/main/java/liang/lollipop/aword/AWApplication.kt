@@ -13,7 +13,7 @@ class AWApplication:Application() {
 
     override fun onCreate() {
         super.onCreate()
-        CrashHandler.init(this)
+//        CrashHandler.init(this)
         HttpRequest.init(this)
     }
 
