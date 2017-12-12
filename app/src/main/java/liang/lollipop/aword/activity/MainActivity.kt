@@ -20,8 +20,11 @@ import liang.lollipop.aword.view.TouchListenerImageView
 import java.util.*
 import android.content.IntentFilter
 import android.support.v4.content.ContextCompat
+import android.text.TextUtils
 import liang.lollipop.aword.R
+import liang.lollipop.aword.receiver.AlertReceiver
 import liang.lollipop.aword.service.UpdateWordService
+import liang.lollipop.aword.util.AlertUtil
 import liang.lollipop.aword.util.WordDBUtil
 
 
@@ -97,7 +100,12 @@ class MainActivity : AppCompatActivity(), View.OnClickListener,ValueAnimator.Ani
         initView()
         initBroadcastReceiver()
 
-        nextWord()
+        val intentWord = intent.getStringExtra(AlertReceiver.ARG_WORD)
+        if(TextUtils.isEmpty(intentWord)){
+            nextWord()
+        }else{
+            wordView.text = intentWord
+        }
 
         startService(Intent(this,UpdateWordService::class.java))
     }
@@ -360,6 +368,8 @@ class MainActivity : AppCompatActivity(), View.OnClickListener,ValueAnimator.Ani
     override fun onDestroy() {
         super.onDestroy()
         deleteBroadcastReceiver()
+        val next = wordArray[random.nextInt(wordArray.size)]
+        AlertUtil.alarmTo(this,next)
     }
 
 }
